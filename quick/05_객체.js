@@ -61,3 +61,23 @@ function Person(name) {
 
 var person = new Person("Sarah");
 person.greeting();
+
+// Object 생성자 방법 1
+var person1 = new Object();
+person1.name = "Chris";
+person1["age"] = 38;
+person1.greeting = function () {
+  console.log("Hi! " + this.name + "[" + this.age + "]");
+};
+
+// Object 생성자 방법 2
+var person2 = new Object({
+  name: "Chris",
+  age: 38,
+  greeting: function () {
+    console.log("Hello! " + this.name + "[" + this.age + "]");
+  },
+});
+
+person1.greeting();
+person2.greeting();

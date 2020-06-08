@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function Person(first, last, age, gender, interests) {
+      this.name = {
+        first,
+        last,
+      };
+      this.age = age;
+      this.gender = gender;
+      this.interests = interests;
+    }
+    function Teacher(first, last, age, gender, interests, subject) {
+      Person.call(this, first, last, age, gender, interests);
+
+      this.subject = subject;
+    }
+
+    teacher = new Teacher("MH", "R", 28, "male", "coding", "IT");
+    console.log(teacher.name);
+  </script>
+</html>
