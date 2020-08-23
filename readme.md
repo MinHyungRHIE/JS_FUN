@@ -8,13 +8,13 @@
 
  1.  [JavaScript 첫걸음](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps)
 
-  - - [ ] [JavaScript가 뭔가요?](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
-  - - [ ] [자바스크립트 기초](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/A_first_splash)
-  - - [ ] [자바스크립트 문제해결](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_went_wrong)
-  - - [ ] [필요한 정보를 저장하기-변수](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Variables)
-  - - [ ] [자바스크립트의 기본적인 연산 - 숫자와 연산자](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Math)
-  - - [ ] [문자열 다루기 — 문자열](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Strings)
-  - - [ ] [문자열 제대로 다루기](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Useful_string_methods)
+  - - [X] [JavaScript가 뭔가요?](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
+  - - [X] [자바스크립트 기초](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/A_first_splash)
+  - - [X] [자바스크립트 문제해결](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_went_wrong)
+  - - [X] [필요한 정보를 저장하기-변수](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Variables)
+  - - [X] [자바스크립트의 기본적인 연산 - 숫자와 연산자](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Math)
+  - - [X] [문자열 다루기 — 문자열](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Strings)
+  - - [X] [문자열 제대로 다루기](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Useful_string_methods)
   - - [ ] [Arrays](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Arrays)
 <hr>
 
@@ -88,3 +88,4 @@
 - - [ ] [자바스크립트의 메모리관리](https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management)
 
 - - [ ] [동시성 모델과 이벤트 루프](https://developer.mozilla.org/ko/docs/Web/JavaScript/EventLoop)
+
