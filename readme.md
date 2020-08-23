@@ -15,7 +15,7 @@
   - - [X] [자바스크립트의 기본적인 연산 - 숫자와 연산자](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Math)
   - - [X] [문자열 다루기 — 문자열](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Strings)
   - - [X] [문자열 제대로 다루기](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Useful_string_methods)
-  - - [ ] [Arrays](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Arrays)
+  - - [X] [Arrays](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Arrays)
 <hr>
 
  2. [JavaScript 구성 요소](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks)

@@ -468,13 +468,14 @@ myArray
 // (5) ["Manchester", "London", "Liverpool", "Birmingham", "Leeds"]
 ```
 
-그러면 배열의 제일 처음 부분 item 추가/제거는?
- - unshift() <-> push()
+*그러면 배열의 제일 처음 부분 item 추가/제거는?*
+
+unshift() <-> push()
 ```js
 myArray.unshift('Edinburgh');
 myArray;
 ```
- - shift() <-> pop()
+shift() <-> pop()
 ```js
 myArray.shift();
 ```
