@@ -266,6 +266,56 @@ multiply(4, 7);
 multiply(20, 20);
 multiply(0.5, 3);
 ```
+
+익명함수
+```js
+//대부분 이벤트 발생에 따른 수많은 코드를 작동하기 위해 주로 쓰인다.
+myButton.onclick = function() {
+  alert('hello');
+  // I can put as much code
+  // inside here as I want
+}
+
+//변수 속에 익명 함수를 넣을 수도 있다
+var myGreeting = function() {
+  alert('hello');
+}
+```
+
+#### 함수와 스코프 문제
+
+우리 '스코프(scope)'에 대해 얘기해 볼까요? '스코프'는 함수와 관련된 매우 중요한 개념입니다.  함수를 생성할 때, 변수 및 함수 내 정의된 코드들은 그들만의 '스코프' 안에 자리하게 됩니다. 그 말인 즉슨, 다른 함수의 내부나 외부 함수의 코드가 접근할 수 없는 그들만의 구획에 갇혀 있다는 뜻입니다. 
+
+함수 바깥에 선언된 가장 상위 레벨의 스코프를 '전역 스코프(global scope)' 라고 부릅니다.전역 스코프 내에 정의된 값들은 어느 코드든 접근이 가능합니다.
+
+자바스크립트는 다양한 이유로 인해 이와 같은 기능을 제공하지만, 주로는 안전성과 구조 때문입니다. 어떤 때에는 당신의 변수가 어느 코드나 접근 가능한 변수가 되는 걸 원치 않을 겁니다. 당신이 어딘가에서 불러온 외부 스크립트가 문제를 일으킬 수도 있으니깐요. 외부 스크립트의 코드와 같은 변수 이름을 사용하면 충돌이 일어나게 돼요. 이건 악의적일 수도 있고, 아님 뭐 단순한 우연이겠죠.
+
+예를 들어 , 당신에게 두 개의 외부 자바스크립트 파일을 호출하는 HTML이 있다고 쳐요. 그 둘은 같은 이름으로 정의된 변수와 함수를 사용하고 있습니다.
+
+```html
+<!-- Excerpt from my HTML -->
+<script src="first.js"></script>
+<script src="second.js"></script>
+<script>
+  greeting();
+</script>
+```
+```js
+// first.js
+var name = 'Chris';
+function greeting() {
+  alert('Hello ' + name + ': welcome to our company.');
+}
+```
+```js
+// second.js
+var name = 'Zaptec';
+function greeting() {
+  alert('Our company is called ' + name + '.');
+}
+```
+두 함수 모두 greeting()라고 불리지만,  당신은 second.js  파일의 greeting() 함수에만 접근 가능합니다. HTML 소스 코드 상 후자이므로, 그 파일의 변수와 기능이  first.js것을 덮어쓰는 거죠.
+
 ### 이벤트
 
 이벤트를 헨들링하는 많은 방법이 있다.
@@ -308,6 +358,31 @@ function setUserName() {
     myHeading.innerHTML = 'Mozilla is cool, ' + myName;
   }
 }
+```
+
+Switch문도 있네?
+```js
+switch (expression) {
+  case choice1:
+    run this code
+    break;
+
+  case choice2:
+    run this code instead
+    break;
+    
+  // include as many cases as you like
+
+  default:
+    actually, just run this code
+}
+```
+
+삼항 연산자도 있음
+```js
+( condition ) ? run this code : run this code instead
+
+var greeting = ( isBirthday ) ? 'Happy birthday Mrs. Smith — we hope you have a great day!' : 'Good morning Mrs. Smith.';
 ```
 
 ### HTML 속 JS 활용 팁
@@ -479,3 +554,191 @@ shift() <-> pop()
 ```js
 myArray.shift();
 ```
+
+### 자바스크립트 객체
+
+ - 객체란 관련된 데이터와 함수의 집합
+
+```JS
+var person = {};
+```
+출력 결과
+```
+[Object Object]
+```
+ - 객체에 데이터와 함수 넣기
+```js
+var person = {
+  name: ['Bob', 'Smith'],
+  age: 32,
+  gender: 'male',
+  interests: ['music', 'skiing'],
+  bio: function() {
+    alert(this.name[0] + ' ' + this.name[1] + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  },
+  greeting: function() {
+    alert('Hi! I\'m ' + this.name[0] + '.');
+  }
+};
+```
+우리가 만든 person 객체는 문자열, 숫자, 배열 두개와 두개의 함수를 가지고 있다. 처음 4개의 아이템은 데이터 아이템인데, 이걸 객체의 속성(Property)라고 부른다. 끝에 두개의 아이템은 함수인데 이 함수를 통해 데이터를 가지고 뭔가 일을 할 수 있게 됩니다. 이걸 우리는 메소드(Method) 라고 부릅니다.
+
+ - 객체 데이터 하위 namespace 접근
+```js
+var person = {
+  name : {
+  first: 'Bob',
+  last: 'Smith'
+  }
+}
+
+//--방식1
+person.age
+person.name.first
+
+//--방식2
+person['age']
+person['name']['first']
+```
+위와 같은 방법으로 기존에 존재하는 속성이나 메소드의 값을 설정하는 것 뿐만아니라 완전히 새로운 멤버를 생성할 수도 있다.
+
+#### this에 관하여
+```js
+var person = {
+  greeting: function() {
+  alert('Hi! I\'m ' + this.name.first + '.');
+  }
+}
+```
+this 키워드는 지금 동작하고 있는 코드를 가지고 있는 객체를 가리킵니다. 위의 예제에서 this 는 person 객체와 동일합니다.
+
+```js
+var person1 = {
+  name: 'Chris',
+  greeting: function() {
+    alert('Hi! I\'m ' + this.name + '.');
+  }
+}
+
+var person2 = {
+  name: 'Brian',
+  greeting: function() {
+    alert('Hi! I\'m ' + this.name + '.');
+  }
+}
+```
+이 예제에서, 메소드의 실제 코드는 완전히 동일하지만 person1.greeting() 은 "Hi! I'm Chris." 를 출력합니다. 반면 person2.greeting() 은 "Hi! I'm Brian." 을 출력하게 됩니다. 앞서 이야기한 것처럼, this 은 실행중인 코드가 속해있는 객체입니다. 객체 리터럴을 직접 지정해서 사용하는 경우라면 그리 유용하지 않겠지만, 동적으로 객체를 생성하는 경우(예를 들면 생성자를 사용하는 경우)에는 매우 유용합니다. 
+
+ - 객체 템플릿의 템플릿 정의(`추상화`:프로그래머의 의도에 맞추어 가장 중요한 것들만을 뽑아서 복잡한 것들을 보다 단순한 모델로 변환하는 작업) --`Instantiation`--> 실제 객체 생성
+
+ -  OOP 에서는,특정 클래스를 기반으로 새로운 클래스를 만들 수 있습니다 — child 클래스 는 부모 클래스를 상속 받아서 만들어집니다. child 클래스는 상속을 통해 부모 클래스에 정의된 데이터와 함수를 고스란히 사용할 수 있습니다. 클래스마다 기능이 달라지는 부분이 있다면, 직접 해당 클래스에 원하는 기능을 정의할 수 있습니다.
+
+ 혹시 궁금해 하실까봐 말씀드리면, 여러 객체 타입에 같은 기능을 정의할 수 있는 능력을 멋진 용어로 "다형성(polymorphism)" 이라고 합니다.
+
+#### 객체 생성에 관하여
+
+사람을 정의해 보자
+```js
+function createNewPerson(name) {
+  var obj = {};
+  obj.name = name;
+  obj.greeting = function() {
+    alert('Hi! I\'m ' + this.name + '.');
+  };
+  return obj;
+}
+```
+이제 함수를 호출해 새로운 사람을 만들자
+```js
+var salva = createNewPerson('Salva');
+salva.name;
+salva.greeting();
+```
+그런데... 꼭 빈 객체를 만들어서 내용을 채운 다음 return 해줘야하나? No NO!!!
+
+```js
+function Person(name) {
+  this.name = name;
+  this.greeting = function() {
+    alert('Hi! I\'m ' + this.name + '.');
+  };
+}
+```
+이걸 사용하자면?
+```js
+var person1 = new Person('Bob');
+var person2 = new Person('Sarah');
+```
+두 객체의 기능은 따로 패키징되어 서로 충돌하지 않을 것입니다. 그리고 두 Person 객체는 각각 고유의 name 프로퍼티와 greeting() 메소드를 사용할 수 있습니다. 이 둘이 생성될 때 부여받은 자신의 name 값을 사용한다는 것에 주목하십시오. 이것이 this를 사용하는 매우 중요한 이유 중 하나입니다. 
+
+ - 생성자 완성시키기
+
+```js
+function Person(first, last, age, gender, interests) {
+  this.name = {
+    'first': first,
+    'last' : last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+  this.bio = function() {
+    alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  };
+  this.greeting = function() {
+    alert('Hi! I\'m ' + this.name.first + '.');
+  };
+}
+```
+```js
+var person1 = new Person('Bob', 'Smith', 32, 'male', ['music', 'skiing']);
+```
+
+#### 객체 생성하는 다른 방법
+
+ - Object() 사용
+
+Object 역시 생성자를 가지고 있습니다. 빈 객체를 생성하는 함수이죠.
+
+```js
+var person1 = new Object();
+
+person1.name = 'Chris';
+person1['age'] = 38;
+person1.greeting = function() {
+  alert('Hi! I\'m ' + this.name + '.');
+};
+
+// ---- OR ----
+
+var person1 = new Object({
+  name: 'Chris',
+  age: 38,
+  greeting: function() {
+    alert('Hi! I\'m ' + this.name + '.');
+  }
+});
+```
+ - create() 함수 사용
+
+자바스크립트는 create()라는 내장함수를 가지고 있어 이미 존재하는 객체를 이용해 새로운 객체를 만들 수 있습니다.
+
+```js
+var person2 = Object.create(person1);
+
+person2.name
+person2.greeting()
+```
+객체 주소값은 공유되지 않아서 ㄱㅊㄱㅊ
+
+#### 자바스크립트는 프로토타입 기반 언어(prototype-based language)
+
+JavaScript는 흔히 프로토타입 기반 언어(prototype-based language)라 불립니다.— 모든 객체들이 메소드와 속성들을 상속 받기 위한 템플릿으로써 프로토타입 객체(prototype object)를 가진다는 의미입니다. 프로토타입 객체도 또 다시 상위 프로토타입 객체로부터 메소드와 속성을 상속 받을 수도 있고 그 상위 프로토타입 객체도 마찬가지입니다. 이를 프로토타입 체인(prototype chain)이라 부르며 다른 객체에 정의된 메소드와 속성을 한 객체에서 사용할 수 있도록 하는 근간입니다.
+
+정확히 말하자면 상속되는 속성과 메소드들은 각 객체가 아니라 객체의 생성자의 prototype이라는 속성에 정의되어 있습니다.
+
+JavaScript에서는 객체 인스턴스와 프로토타입 간에 연결(많은 브라우저들이 생성자의 prototype 속성에서 파생된 \_\_proto__ 속성으로 객체 인스턴스에 구현하고 있습니다.)이 구성되며 이 연결을 따라 프로토타입 체인을 타고 올라가며 속성과 메소드를 탐색합니다.
+
+객체의 prototype(Object.getPrototypeOf(obj)함수 또는 deprecated 된 \_\_proto__속성으로 접근 가능한)과 생성자의 prototype 속성의 차이를 인지하는 것이 중요합니다. 전자는 개별 객체의 속성이며 후자는 생성자의 속성입니다. 이 말은 Object.getPrototypeOf(new Foobar())의 반환값이 Foobar.prototype과 동일한 객체라는 의미입니다.
+
+![프로토타입](./mdsrc/prototype.png)

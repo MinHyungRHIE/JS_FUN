@@ -20,19 +20,19 @@
 
  2. [JavaScript 구성 요소](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks)
 
-- - [ ] [Making decisions in your code — 조건문](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/%EC%A1%B0%EA%B1%B4%EB%AC%B8)
-- - [ ] [Looping code](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Arrays)
-- - [ ] [함수 — 재사용 가능한 코드 블록](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Functions)
-- - [ ] [Build your own function](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Build_your_own_function)
-- - [ ] [Function return values](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Return_values)
-- - [ ] [Introduction to events](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Events)
+- - [X] [Making decisions in your code — 조건문](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/%EC%A1%B0%EA%B1%B4%EB%AC%B8)
+- - [X] [Looping code](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/Arrays)
+- - [X] [함수 — 재사용 가능한 코드 블록](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Functions)
+- - [X] [Build your own function](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Build_your_own_function)
+- - [X] [Function return values](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Return_values)
+- - [X] [Introduction to events](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Building_blocks/Events)
 
 <hr>
 
  3. [JavaScript 객체 소개](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects)
 
-- - [ ] [JavaScript 객체 기본](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)
-- - [ ] [Object-oriented JavaScript for beginners](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object-oriented_JS)
+- - [X] [JavaScript 객체 기본](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)
+- - [X] [Object-oriented JavaScript for beginners](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object-oriented_JS)
 - - [ ] [Object prototypes](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_prototypes)
 - - [ ] [Inheritance in JavaScript](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Inheritance)
 - - [ ] [JSON으로 작업하기](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/JSON)
