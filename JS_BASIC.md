@@ -742,3 +742,465 @@ JavaScript에서는 객체 인스턴스와 프로토타입 간에 연결(많은 
 객체의 prototype(Object.getPrototypeOf(obj)함수 또는 deprecated 된 \_\_proto__속성으로 접근 가능한)과 생성자의 prototype 속성의 차이를 인지하는 것이 중요합니다. 전자는 개별 객체의 속성이며 후자는 생성자의 속성입니다. 이 말은 Object.getPrototypeOf(new Foobar())의 반환값이 Foobar.prototype과 동일한 객체라는 의미입니다.
 
 ![프로토타입](./mdsrc/prototype.png)
+
+---
+---
+---
+### 프로토타입 속성 : 상속받을 멤버들이 정의된 곳
+
+[표준 내장 객체 : Object](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+위 링크를 보면 알 수 있듯이 Object에는 많은 속성과 메소드들이 있다.
+
+```js
+function Person(first, last, age, gender, interests) {
+  this.name = {
+    'first': first,
+    'last' : last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+  this.bio = function() {
+    alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  };
+  this.greeting = function() {
+    alert('Hi! I\'m ' + this.name.first + '.');
+  };
+}
+```
+```js
+var person1 = new Person('Bob', 'Smith', 32, 'male', ['music', 'skiing']);
+```
+그러나 person1을 보면 일부만 상속된 것을 볼 수 있다.
+
+그 이유는 상속 받는 멤버들은 prototype 속성(sub-namespace)에 정의 되어 있기 때문이다. 즉, 프로토타입 체인을 통해 상속하고자 하는 속성과 메소드를 담아두는 버킷으로 사용되는 객체이다.
+```js
+Person.prototype
+```
+```js
+Object.prototype
+```
+이 버킷에 정의되어 있지 않으면 상속되지 않는다. 상속되지 않는 것들은 Object() 생성자에서만 사용될 수 있을 것이다. 이 때 함수(Function) 역시 객체라는 점 유의 바란다.
+```js
+const sum = new Function('a', 'b', 'return a + b');
+
+console.log(sum(2, 6));
+// expected output: 8
+```
+ - create() 다시보기
+```js
+var person2 = Object.create(person1);
+```
+create() 메소드가 실제로 하는 일은 주어진 객체를 프로토타입 객체로 삼아 새로운 객체를 생성합니다. 여기서 person2는 person1을 프로토타입 객체로 삼습니다. 아래 코드를 실행하여 이를 확인할 수 있습니다:
+```js
+person2.__proto__
+```
+콘솔 상에는 person1이 출력됩니다.
+
+ - 생성자 속성
+
+모든 생성자 함수는 constructor 속성을 지닌 객체를 프로토타입 객체로 가지고 있습니다. 이 constructor 속성은 원본 생성자 함수 자신을 가리키고 있습니다. 
+
+
+모두다 Person() 생성자 함수 반환
+```js
+person1.constructor
+person2.constructor
+```
+
+생성자 이름 알기
+```js
+instanceName.constructor.name
+```
+
+ - 프로토타입 수정
+
+생성자의 prototype 속성을 수정하는 법에 대해 알아봅시다(프로토타입에 메소드를 추가하면 해당 생성자로 생성된 모든 객체에서 사용 가능합니다).
+```js
+Person.prototype.farewell = function() {
+  alert(this.name.first + ' has left the building. Bye for now!');
+};
+```
+```js
+person1.farewell();
+```
+생성자에서 지정했던 person의 name이 alert 창으로 출력되는 것을 확인할 수 있습니다. 매우 유용한 기능이지만 중요한 점은 prototype에 새 메소드를 추가하는 순간 동일한 생성자로 생성된 모든 객체에서 추가된 메소드를 바로 사용할 수 있다는 점입니다.
+
+아래 코드를 다시한번 보자.
+```js
+Person.test = "Hello"
+```
+
+그 다음 Person의 인스턴스에 `test`를 출력해보면
+```js
+person1.test
+>>undefined
+```
+출력이 되지 않는다. Person의 prototype을 보자.
+```js
+Person.prototype
+```
+그리고 그 안에 constructor를 보자. `test`가 있다. 그러나 prototype안에는 없다.
+
+ - 프로토타입과 this
+```js
+Person.prototype.fullName = this.name.first + ' ' + this.name.last;
+```
+이 코드의 this는 global scope의 변수를 가르키므로 undefined가 될 것이다. 
+
+```js
+function Person(first, last, age, gender, interests) {
+  this.name = {
+    'first': first,
+    'last' : last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+  this.bio = function() {
+    alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  };
+  this.greeting = function() {
+    alert('Hi! I\'m ' + this.name.first + '.');
+  };
+}
+```
+여기서 this가 제대로 동작한 이유는 this가 `function Person { }` 코드 블록 안에 있기 때문이다. 즉, function scope인 것. 그래서 여기서 this는 Person을 가리킨다.
+
+ - 프로토타입 활용의 바람직한 예
+사실 일반적인 방식으로는 속성은 생성자에서, 메소드는 프로토타입에서 정의합니다. 생성자에는 속성에 대한 정의만 있으며 메소드는 별도의 블럭으로 구분할 수 있으니 코드를 읽기가 훨씬 쉬워집니다. 아래처럼요:
+```js
+// 생성자에서 속성 정의
+
+function Test(a, b, c, d) {
+  // 속성 정의
+}
+
+// 첫 메소드 정의
+
+Test.prototype.x = function() { ... };
+
+// 두번째 메소드 정의
+
+Test.prototype.y = function() { ... };
+
+// 그 외.
+```
+
+---
+## 상속
+Person 생성자를 만들자
+```js
+function Person(first, last, age, gender, interests) {
+  this.name = {
+    first,
+    last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+};
+
+Person.prototype.greeting = function() {
+  alert('Hi! I\'m ' + this.name.first + '.');
+};
+```
+
+Person을 상속받는 Teacher 생성자를 만들자
+```js
+function Teacher(first, last, age, gender, interests, subject) {
+  Person.call(this, first, last, age, gender, interests);
+
+  this.subject = subject;
+}
+```
+Person() 생성자와 여러모로 비슷해 보이지만 여지껏 보지 못했던 한가지 차이점이 있습니다 — call() 함수죠. call() 함수의 첫번째 매개변수는 다른 곳에서 정의된 함수를 현재 컨텍스트에서 실행할 수 있도록 합니다. 실행하고자 하는 함수의 첫 번째 매개변수로 this를 전달하고 나머지는 실제 함수 실행에 필요한 인자들을 전달하면 됩니다.
+
+Teacher()의 생성자는 Person()을 상속받았으므로 같은 매개변수들이 필요합니다. 따라서 동일한 매개변수들을 call()의 인자로 전달하여 실행합니다.
+
+마지막 줄에서는 새 속성인 subject를 정의하여 Person이 아닌 Teacher만이 갖는 속성을 만들어 줍니다.
+
+ - 문제점
+
+ 프로토타입을 배우기 전에는 아래와 같이 했다.
+```js
+function Person(first, last, age, gender, interests) {
+  this.name = {
+    first,
+    last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+
+  this.greeting = function() {
+      alert('Hi! I\'m ' + this.name.first + '.');
+  };
+
+};
+```
+그러나 지금은 속성만 생성자에 정의하고 메소드는 따로  prototype 버킷에 저장하였다. 둘의 차이는 아래와 같다.
+```js
+// 생성자에 속성과 메소드를 한꺼번에
+Person.prototype
+>>{constructor: ƒ}
+Object.getOwnPropertyNames(Teacher.prototype)
+>>["constructor"]
+
+
+// 생성자에 속성만 그리고 메소드는 따로
+Person.prototype
+>>{greeting: ƒ, constructor: ƒ}
+Object.getOwnPropertyNames(Person.prototype)
+>>(2) ["constructor", "greeting"]
+```
+
+즉, Teacher에 문제가 생길 것이다. `call()`에는 `greeting()`이 없기 때문이다.
+
+즉, 아래의 코드를 추가해야 한다.
+```js
+Teacher.prototype = Object.create(Person.prototype);
+```
+Teacher.prototype의 constructor 속성이 Person()으로 되어 있다.
+```js
+Teacher.prototype.constructor
+```
+이 코드가 문제가 생간다는 것이다. 그러므로 아래와 같이 해줘야 한다.
+```js
+Teacher.prototype.constructor = Teacher;
+```
+아... 복잡하다.
+ - 복잡한 해결방안 간단하게 : ECMAScript 2015 클래스
+
+ECMAScript 2015에서는 C++나 Java와 유사한 클래스 문법을 공개하여 클래스를 조금 더 쉽고 명확하게 재활용 할 수 있게 되었습니다. 
+
+Class-스타일
+```js
+class Person {
+  constructor(first, last, age, gender, interests) {
+    this.name = {
+      first,
+      last
+    };
+    this.age = age;
+    this.gender = gender;
+    this.interests = interests;
+  }
+
+  greeting() {
+    console.log(`Hi! I'm ${this.name.first}`);
+  };
+
+  farewell() {
+    console.log(`${this.name.first} has left the building. Bye for now!`);
+  };
+}
+```
+console.log(`${this.name.first} has left the building. Bye for now!`); 와 같이 문자 결합이 아닌 Template literals를 사용하였음. 템플릿 리터럴은 내장된 표현식을 허용하는 문자열 리터럴입니다. 여러 줄로 이뤄진 문자열과 문자 보간기능을 사용할 수 있습니다. 이전 버전의 ES2015사양 명세에서는 "template strings" (템플릿 문자열) 라고 불려 왔습니다.
+
+더 자세한 내용은 : [여기](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals)
+
+
+사용
+```js
+let han = new Person('Han', 'Solo', 25, 'male', ['Smuggling']);
+han.greeting();
+// Hi! I'm Han
+
+let leia = new Person('Leia', 'Organa', 19, 'female' ['Government']);
+leia.farewell();
+// Leia has left the building. Bye for now
+```
+
+상속
+```js
+class Teacher extends Person {
+  constructor(first, last, age, gender, interests, subject, grade) {
+    super(first, last, age, gender, interests);
+
+    // subject and grade are specific to Teacher
+    this.subject = subject;
+    this.grade = grade;
+  }
+}
+```
+
+사용
+```js
+let snape = new Teacher('Severus', 'Snape', 58, 'male', ['Potions'], 'Dark arts', 5);
+snape.greeting(); // Hi! I'm Severus.
+snape.farewell(); // Severus has left the building. Bye for now.
+snape.age // 58
+snape.subject; // Dark arts
+```
+ - Getter와 Setter
+
+생성한 클래스 인스턴스의 속성 값을 변경하거나 최종 값을 예측할 수 없는 경우가 있을 겁니다. Teacher 예제를 보면 인스턴스를 생성하기 전에는 어떤 과목을 가르칠지 아직 모릅니다. 학기 도중에 가르치는 과목이 변경될 수도 있구요.
+
+```js
+class Teacher extends Person {
+  constructor(first, last, age, gender, interests, subject, grade) {
+    super(first, last, age, gender, interests);
+    // subject and grade are specific to Teacher
+    this._subject = subject;
+    this.grade = grade;
+  }
+
+  get subject() {
+    return this._subject;
+  }
+
+  set subject(newSubject) {
+    this._subject = newSubject;
+  }
+}
+```
+위 클래스를 보시면 subject 속성에 대해 getter와 setter가 생겼습니다. 멤버 변수에는 _를 붙여 getter/setter와 구분을 하였습니다. 이렇게 하지 않으면 get/set을 호출할때마다 에러가 발생합니다:
+
+_subject에 새 값을 할당하려면 `snape._subject="new value"`를 실행합니다.
+
+---
+## JSON으로 작업하기
+### JSON 가져오기
+- JSON을 가져오기 위해서는, XMLHttpRequest (때론 XHR)로 불리는 API를 사용하면 된다
+ - 우리가 서버로 부터 다양한 리소스를 가져오는 요청을 만들어 준다.
+ - 즉, 전체 페이지를 불러오지 않고도 필요한 부분만을 업데이트 할 수 있다. 
+
+ <br>
+
+1. 일단, 변수로 둘 JSON의 URL을 가져와야 합니다. 아래의 코드를 당신의 JavaScript 코드 내에 추가해 주세요.
+```js
+var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+```
+
+2. 요청을 만들기 위해, 우리는 new 키워드를 이용하여 XMLHttpRequest 생성자로부터 새로운 request 인스턴스를 생성해야 합니다. 아래의 코드를 추가해 주세요.
+```js
+var request = new XMLHttpRequest();
+```
+
+3. 이제 open() 메소드를 사용해 새로운 요청을 만듭니다. 아래의 코드를 추가해 주세요.
+```js
+request.open('GET', requestURL);
+```
+
+4. 다음으로, 아래의 두 줄을 추가해 주세요. responseType 을 JSON으로 설정했어요. XHR로 하여금 서버가 JSON 데이터를 반환할 것이며, 자바스크립트 객체로서 변환될 것이라는 걸 알게 하기 위해서죠. 이제  send() 메서드를 이용해 요청을 보냅시다.
+
+```js
+request.responseType = 'json';
+request.send();
+```
+
+5. 정상적으로 받았다면, `request.response`에 응답받은 json이 담겨있습니다.
+
+### JSON 객체와 JSON 문자열
+ - `JSON.parse(obj)` : 문자 형태로 된 JSON 형식을 JSON 객체로 반환
+ - `JSON.stringify(obj)` : JSON 객체를 문자열로 바꿔서 반환
+ - 위 두 케이스 모두 obj를 조작하는게 아니라 조작된 객체를 반환하는 것이다.
+
+#### 꿀팁 ! 객체 상수로 만들기
+
+`Object.freeze()` : 동결된 객체는 더 이상 변경될 수 없습니다.
+
+```js
+const obj = {
+  prop: 42
+};
+
+Object.freeze(obj);
+
+obj.prop = 33;
+// Throws an error in strict mode
+
+console.log(obj.prop);
+// expected output: 42
+
+```
+
+---
+## Asynchronous (비동기 : 동시에 발생하지 않는)
+ - 브라우저 Blocking 현상 : 큰 Chunk가 발생 --> Frozen
+
+브라우저 Blocking 체험하기
+```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple synchronous JavaScript example</title>
+  </head>
+  <body>
+    <button>Click me</button>
+    <script>
+      const btn = document.querySelector('button');
+      btn.addEventListener('click', () => {
+        let myDate;
+        for(let i = 0; i < 10000000; i++) {
+          let date = new Date();
+          myDate = date
+        }
+
+        console.log(myDate);
+
+        let pElem = document.createElement('p');
+        pElem.textContent = 'This is a newly-added paragraph.';
+        document.body.appendChild(pElem);
+      });
+    </script>
+  </body>
+</html>
+```
+
+ - JS is traditionally single-threaded
+ - Even with multiple cores, you could only get it to run tasks on a single thread, called the main thread.
+
+ - Web Workers makes it possible to run a script operation in a background thread separate from the main execution thread of a web application. The advantage of this is that laborious processing can be performed in a separate thread, allowing the main (usually the UI) thread to run without being blocked/slowed down.
+
+ - After some time, JavaScript gained some tools to help with such problems. Web workers allow you to send some of the JavaScript processing off to a separate thread, called a worker so that you can run multiple JavaScript chunks simultaneously. You'd generally use a worker to run expensive processes off the main thread so that user interaction is not blocked.
+
+**Use Web Worker API**
+ ```js
+  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple synchronous JavaScript example</title>
+  </head>
+  <body>
+    <button>Click me</button>
+    <script>
+      const btn = document.querySelector('button');
+      const worker = new Worker('worker.js');
+
+      btn.addEventListener('click', () => {
+        worker.postMessage('Go!');
+
+        let pElem = document.createElement('p');
+        pElem.textContent = 'This is a newly-added paragraph.';
+        document.body.appendChild(pElem);
+      });
+
+      worker.onmessage = function(e) {
+        console.log(e.data);
+      }
+    </script>
+  </body>
+</html>
+ ```
+**worker.js**
+```js
+onmessage = function() {
+  let myDate;
+  for(let i = 0; i < 10000000; i++) {
+    let date = new Date();
+    myDate = date
+  }
+
+  postMessage(myDate);
+}
+```
+
+#### 잠깐!
+JavaScript에서 Blob(Binary Large Object, 블랍)은 이미지, 사운드, 비디오와 같은 멀티미디어 데이터를 다룰 때 사용할 수 있습니다. 대개 데이터의 크기(Byte) 및 MIME 타입을 알아내거나, 데이터를 송수신을 위한 작은 Blob 객체로 나누는 등의 작업에 사용합니다.
+

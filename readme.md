@@ -33,16 +33,16 @@
 
 - - [X] [JavaScript 객체 기본](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)
 - - [X] [Object-oriented JavaScript for beginners](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object-oriented_JS)
-- - [ ] [Object prototypes](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_prototypes)
-- - [ ] [Inheritance in JavaScript](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Inheritance)
-- - [ ] [JSON으로 작업하기](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/JSON)
-- - [ ] [Object building practice](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_building_practice)
+- - [X] [Object prototypes](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_prototypes)
+- - [X] [Inheritance in JavaScript](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Inheritance)
+- - [X] [JSON으로 작업하기](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/JSON)
+- - [X] [Object building practice](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_building_practice)
 
 <hr>
 
 4. [비동기 JavaScript](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Asynchronous)
 
- - - [ ] [General asynchronous programming concepts](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Concepts)
+ - - [X] [General asynchronous programming concepts](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Concepts)
  - - [ ] [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing)
  - - [ ] [Cooperative asynchronous JavaScript: Timeouts and intervals](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Timeouts_and_intervals)
  - - [ ] [Graceful asynchronous programming with Promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises)
@@ -88,4 +88,5 @@
 - - [ ] [자바스크립트의 메모리관리](https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management)
 
 - - [ ] [동시성 모델과 이벤트 루프](https://developer.mozilla.org/ko/docs/Web/JavaScript/EventLoop)
+
 
