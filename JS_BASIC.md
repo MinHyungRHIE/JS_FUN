@@ -1204,3 +1204,174 @@ onmessage = function() {
 #### 잠깐!
 JavaScript에서 Blob(Binary Large Object, 블랍)은 이미지, 사운드, 비디오와 같은 멀티미디어 데이터를 다룰 때 사용할 수 있습니다. 대개 데이터의 크기(Byte) 및 MIME 타입을 알아내거나, 데이터를 송수신을 위한 작은 Blob 객체로 나누는 등의 작업에 사용합니다.
 
+```js
+let response = fetch('myImage.png'); // fetch is asynchronous
+let blob = response.blob();
+// display your image blob in the UI somehow
+```
+
+Note that not all callbacks are async — some run synchronously. An example is when we use `Array.prototype.forEach()` to loop through the items in an array (see it live, and the source):
+```js
+const gods = ['Apollo', 'Artemis', 'Ares', 'Zeus'];
+
+gods.forEach(function (eachName, index){
+  console.log(index + '. ' + eachName);
+});
+```
+In this example we loop through an array of Greek gods and print the index numbers and values to the console. The expected parameter of `forEach()` is a callback function, which itself takes two parameters, a reference to the array name and index values. However, it doesn't wait for anything — it runs immediately.
+
+* Promises
+
+Promises are the new style of async code that you'll see used in modern Web APIs. A good example is the fetch() API, which is basically like a modern, more efficient version of XMLHttpRequest. Let's look at a quick example, from our Fetching data from the server article:
+
+```js
+fetch('products.json').then(function(response) {
+  return response.json();
+}).then(function(json) {
+  products = json;
+  initialize();
+}).catch(function(err) {
+  console.log('Fetch problem: ' + err.message);
+});
+```
+
+* setTimeout()
+```js
+let myGreeting = setTimeout(function() {
+  alert('Hello, Mr. Universe!');
+}, 2000)
+```
+```js
+// With a named function
+let myGreeting = setTimeout(function sayHi() {
+  alert('Hello, Mr. Universe!');
+}, 2000)
+
+// With a function defined separately
+function sayHi() {
+  alert('Hello Mr. Universe!');
+}
+
+let myGreeting = setTimeout(sayHi, 2000);
+```
+
+Finally, if a timeout has been created, you can cancel it before the specified time has elapsed by calling clearTimeout(), passing it the identifier of the setTimeout() call as a parameter. So to cancel our above timeout, you'd do this:
+```js
+clearTimeout(myGreeting);
+```
+
+ - setInterval()
+
+setTimeout() works perfectly when you need to run code once after a set period of time. But what happens when you need to run the code over and over again
+
+```js
+function displayTime() {
+   let date = new Date();
+   let time = date.toLocaleTimeString();
+   document.getElementById('demo').textContent = time;
+}
+
+const createClock = setInterval(displayTime, 1000);
+```
+
+setInterval() keeps running a task forever, unless you do something about it. You'll probably want a way to stop such tasks, otherwise you may end up getting errors when the browser can't complete any further versions of the task, or if the animation being handled by the task has finished. You can do this the same way you stop timeouts — by passing the identifier returned by the setInterval() call to the clearInterval() function:
+
+```js
+const myInterval = setInterval(myFunction, 2000);
+
+clearInterval(myInterval);
+```
+
+#### setTimeout(), setInterval() 스킬
+
+ - Recursive timeouts
+```js
+let i = 1;
+
+setTimeout(function run() {
+  console.log(i);
+  i++;
+  setTimeout(run, 100);
+}, 100);
+```
+
+```js
+let i = 1;
+
+setInterval(function run() {
+  console.log(i);
+  i++
+}, 100);
+```
+
+#### How do recursive setTimeout() and setInterval() differ?
+The difference between the two versions of the above code is a subtle one.
+
+- Recursive setTimeout() guarantees the same delay between the executions. (For example, 100ms in the above case.) The code will run, then wait 100 milliseconds before it runs again—so the interval will be the same, regardless of how long the code takes to run.
+- The example using setInterval() does things somewhat differently. The interval you chose includes the time taken to execute the code you want to run in. Let's say that the code takes 40 milliseconds to run — the interval then ends up being only 60 milliseconds.
+- When using setTimeout() recursively, each iteration can calculate a different delay before running the next iteration. In other words, the value of the second parameter can specify a different time in milliseconds to wait before running the code again.
+
+When your code has the potential to take longer to run than the time interval you’ve assigned, it’s better to use recursive setTimeout() — this will keep the time interval constant between executions regardless of how long the code takes to execute, and you won't get errors.
+
+#### 꿀꿀
+[creativeJS](http://creativejs.com/resources/requestanimationframe/index.html)
+
+### Promise를 더 파보자
+```js
+// 콜백 함수가 될 매개변수 설정 
+function plus(a, b, callback) { 
+  var sum = a + b; 
+  callback(sum);
+}
+```
+```js
+// plus 함수에 익명 함수를 인자로 전달
+plus(1, 2, function(result){
+  console.log(result);
+});
+```
+result
+```
+3
+```
+
+ - The trouble with callbacks
+```js
+chooseToppings(function(toppings) {
+  placeOrder(toppings, function(order) {
+    collectOrder(order, function(pizza) {
+      eatPizza(pizza);
+    }, failureCallback);
+  }, failureCallback);
+}, failureCallback);
+```
+[콜백지옥](http://callbackhell.com/)
+
+ - Improvements with promises
+```js
+chooseToppings()
+.then(function(toppings) {
+  return placeOrder(toppings);
+})
+.then(function(order) {
+  return collectOrder(order);
+})
+.then(function(pizza) {
+  eatPizza(pizza);
+})
+.catch(failureCallback);
+```
+Using Arrow Function
+```js
+chooseToppings()
+.then(toppings => placeOrder(toppings))
+.then(order => collectOrder(order))
+.then(pizza => eatPizza(pizza))
+.catch(failureCallback);
+```
+
+You could even do this, since the functions just pass their arguments directly, so there isn't any need for that extra layer of functions:
+
+```js
+chooseToppings().then(placeOrder).then(collectOrder).then(eatPizza).catch(failureCallback);
+```
