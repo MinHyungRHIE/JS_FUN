@@ -1375,3 +1375,155 @@ You could even do this, since the functions just pass their arguments directly, 
 ```js
 chooseToppings().then(placeOrder).then(collectOrder).then(eatPizza).catch(failureCallback);
 ```
+---
+---
+---
+
+## Manipulating Documents
+![web-browser](./mdsrc/web-browser.png)
+
+Web browsers are very complicated pieces of software with a lot of moving parts, many of which can't be controlled or manipulated by a web developer using JavaScript.
+
+ - The window is the browser tab that a web page is loaded into; this is represented in JavaScript by the Window object. Using methods available on this object you can do things like return the window's size (see Window.innerWidth and Window.innerHeight), manipulate the document loaded into that window, store data specific to that document on the client-side (for example using a local database or other storage mechanism), attach an [event handler](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#A_series_of_fortunate_events) to the current window, and more.
+
+ - The navigator represents the state and identity of the browser (i.e. the user-agent) as it exists on the web. In JavaScript, this is represented by the Navigator object. You can use this object to retrieve things like the user's preferred language, a media stream from the user's webcam, etc.
+
+ - he document (represented by the DOM in browsers) is the actual page loaded into the window, and is represented in JavaScript by the Document object. You can use this object to return and manipulate information on the HTML and CSS that comprises the document, for example get a reference to an element in the DOM, change its text content, apply new styles to it, create new elements and add them to the current element as children, or even delete it altogether.
+
+### The document object model
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple DOM example</title>
+  </head>
+  <body>
+      <section>
+        <img src="dinosaur.png" alt="A red Tyrannosaurus Rex: A two legged dinosaur standing upright like a human, with small arms, and a large head with lots of sharp teeth.">
+        <p>Here we will add a link to the <a href="https://www.mozilla.org/">Mozilla homepage</a></p>
+      </section>
+  </body>
+</html>
+```
+
+![dom-screenshot.png](./mdsrc/dom-screenshot.png)
+
+| node name | what is it |
+|:---:|:---|
+|Element node|An element, as it exists in the DOM.|
+|Root node|The top node in the tree, which in the case of HTML is always the HTML node (other markup vocabularies like SVG and custom XML will have different root elements).|
+|Child node| A node directly inside another node. For example, IMG is a child of SECTION in the above example|
+|Descendant node| e: A node anywhere inside another node. For example, IMG is a child of SECTION in the above example, and it is also a descendant. IMG is not a child of BODY, as it is two levels below it in the tree, but it is a descendant of BODY.|
+| Parent node | A node which has another node inside it. For example, BODY is the parent node of SECTION in the above example |
+|Sibling nodes| Nodes that sit on the same level in the DOM tree. For example, IMG and P are siblings in the above example|
+|Text node|A node containing a text string.|
+
+### Active learning: Basic DOM manipulation
+
+```js
+const link = document.querySelector('a');
+link.textContent = 'Mozilla Developer Network';
+link.href = 'https://developer.mozilla.org';
+```
+
+There are older methods available for grabbing element references, such as:
+
+ - Document.getElementById()
+ - Document.getElementsByTagName()
+
+#### Creating and placing new nodes
+```js
+const sect = document.querySelector('section');
+const para = document.createElement('p');
+para.textContent = 'We hope you enjoyed the ride.';
+sect.appendChild(para);
+const text = document.createTextNode(' — the premier source for web development knowledge.');
+const linkPara = document.querySelector('p');
+linkPara.appendChild(text);
+```
+
+#### Moving and removing elements
+
+```js
+sect.appendChild(linkPara);
+sect.removeChild(linkPara);
+```
+When you want to remove a node based only on a reference to itself, which is fairly common, you can use ChildNode.remove():
+```js
+linkPara.remove();
+```
+This method is not supported in older browsers. They have no method to tell a node to remove itself, so you'd have to do the following.
+```js
+linkPara.parentNode.removeChild(linkPara);
+```
+
+#### Manipulating styles
+```js
+para.style.color = 'white';
+para.style.backgroundColor = 'black';
+para.style.padding = '10px';
+para.style.width = '250px';
+para.style.textAlign = 'center';
+```
+```js
+para.setAttribute('class', 'highlight');
+```
+
+### Active learning: Getting useful information from the Window object
+
+```js
+const div = document.querySelector('div');
+let winWidth = window.innerWidth;
+let winHeight = window.innerHeight;
+```
+
+```js
+div.style.width = winWidth + 'px';
+div.style.height = winHeight + 'px';
+```
+```js
+window.onresize = function() {
+  winWidth = window.innerWidth;
+  winHeight = window.innerHeight;
+  div.style.width = winWidth + 'px';
+  div.style.height = winHeight + 'px';
+}
+```
+
+---
+
+## Fetching data from the server
+
+### A basic Ajax request
+
+Let's look at how such a request is handled, using both XMLHttpRequest and Fetch. 
+
+#### XMLHttpRequest
+XMLHttpRequest (which is frequently abbreviated to XHR) is a fairly old technology now — it was invented by Microsoft in the late '90s, and has been standardized across browsers for quite a long time.
+
+```js
+let request = new XMLHttpRequest();
+request.open('GET', url);
+request.responseType = 'text';
+
+request.onload = function() {
+  poemDisplay.textContent = request.response;
+};
+
+```
+#### Fetch
+Modern browsers will not run XHR requests if you just run the example from a local file. This is because of security restrictions
+
+The Fetch API is basically a modern replacement for XHR; it was introduced in browsers recently to make asynchronous HTTP requests easier to do in JavaScript, both for developers and other APIs that build on top of Fetch.
+
+```js
+fetch(url).then(function(response) {
+  response.text().then(function(text) {
+    poemDisplay.textContent = text;
+  });
+});
+```
+
+[example](https://github.com/mdn/learning-area/tree/master/javascript/apis/fetching-data/can-store)
