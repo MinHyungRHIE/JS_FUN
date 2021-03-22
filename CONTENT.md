@@ -90,13 +90,23 @@
 ### - 함수 선언(Function Statement)
 ### - 함수 표현식(Function Expression)
 ### - 함수 선언과 함수 표현식의 차이
-## 2. 전역변수와 지역변수
+## 2. 전역변수
 ## 3. 함수의 매개변수
 ## 4. arguments 객체
-## 5. `immediately-invoked function expression (or IIFE, pronounced "iffy")`
+## 5. IIFE
 ## 6. 스코프와 호이스팅 `var`,`let`,`const`
+### - function scope : `var`
+#### * IIFE의 경우
+### - block scope : `let`, `const`
+#### * `var`의 문제 : 변수 재선언
+#### * TDZ(Temporal Dead Zone)
+#### * const의 보호 범위
 ## 7. 클로저(Closure)
-
+### - 외부 함수와 내부 함수의 관계
+### - 외부 변수 접근 및 변경
+### - 이름 충돌
+### - 클로저를 이용해 변수를 안전하게 저장하기
+### - 클로저 사용시 주의해야할 점
 
 <br><br><br><br><br>
 <hr>

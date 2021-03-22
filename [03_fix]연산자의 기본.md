@@ -4,8 +4,12 @@
 
 ## 1. 산술 연산자
 
-
 ### - `+`
+```js
+var result = 10 + 20;
+console.log(result); //30
+```
+
 #### * 숫자화 연산자
 피연산자가 숫자값이 아니라면 피연산자를 숫자로 변환하기를 시도합니다.
  - +"3" 은 3을 반환합니다.
@@ -17,22 +21,70 @@ console.log("my " + "string"); // console logs the string "my string".
 ```
 
 ### - `-` 
+```js
+var result = 10 - 20;
+console.log(result); //-10
+```
+
 #### * 부정 연산자
 
 피연산자의 반대값(부호 바뀐값)을 반환합니다.
 - x 가 3이면 -x 는 -3을 반환합니다.
 
 ### - `*` 
+```js
+var result = 10 * 20;
+console.log(result); //200
+```
 
 ### - `/` 
+```js
+var result = 10 / 3;
+console.log(result); //3.3333333333333335
+```
 
 ### - `%` 
+```js
+var result = 10 % 3;
+console.log(result); //1
+```
 
 ### - `**`
-
+```js
+var result = 10 ** 3;
+console.log(result); //1000
+```
 <br><br><br><br><br>
 
 ## 2. 증감연산자 `++`, `--`
+```js
+var increasing = 10;
+increasing++; //11
+++increasing; //12
+console.log(increasing); //12
+
+var decreasing = 10;
+decreasing--; //9
+--decreasing; //8
+console.log(decreasing); //8
+```
+
+### - 전위연산과 후위연산
+
+```js
+var num = 10;
+var front = ++num;
+console.log(front, num); //11 11
+
+var num = 10;
+var back = num++;
+console.log(back, num); //11 11
+
+var num = 10;
+console.log(num--); //10
+console.log(num); //9
+```
+
 
 
 <br><br><br><br><br>
@@ -59,7 +111,7 @@ console.log("my " + "string"); // console logs the string "my string".
 |논리 OR (\|\|) |	expr1 \|\| expr2 |expr1을 true로 변환할 수 있으면 expr1을 반환하고, 그렇지 않으면 expr2를 반환합니다.|
 |논리 NOT (!)	|!expr|	단일 피연산자를 true로 변환할 수 있으면 false를 반환합니다. 그렇지 않으면 true를 반환합니다.|
 
-### - 단락평가
+### - 효율적인 연산
 
 - false && anything 는 false로 단축 계산됩니다.
 - true || anything 는 true로 단축 계산됩니다.
@@ -178,7 +230,7 @@ console.log(parseInt("14d", 16)); //333
 
 ### - 구조 분해 할당
 ```js
-var foo = ['one', 'two', 'three'];
+var foo = ['first', 'second', 'third'];
 
 // 구조 분해를 활용하지 않은 경우
 var one   = foo[0];
@@ -187,4 +239,7 @@ var three = foo[2];
 
 // 구조 분해를 활용한 경우
 var [one, two, three] = foo;
+console.log(one); //first
+console.log(two); //second
+console.log(three); //third
 ```

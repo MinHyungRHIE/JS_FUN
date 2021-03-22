@@ -64,8 +64,9 @@ if ('')
 ```
 #### * NaN?
  - number타입
- - `NaN === NaN`의 결과가 false, 본인 스스로가 같지 않은 유일한 JS의 값
- - Number.isNaN(NaN) 이것으로 체크하자
+ - NaN은 JavaScript에서 유일하게 본인 스스로가 같지 않은 유일한 JS의 값이다.
+     - `NaN === NaN`의 결과는 false 
+ - Number.isNaN()와 global 메소드의 isNaN()이 있다.
  - 글로벌의 isNaN()은 'Not a Number'로 number 타입인지 아닌지 체크하므로 조심
 
 ```js
@@ -110,7 +111,7 @@ console.log(result) //pass
 <br><br><br><br><br>
 
 
-## 4. switch문
+## 4. switch~case문
 ```js
 switch (expression) {
   case label_1:
@@ -147,6 +148,10 @@ for (step = 0; step < 5; step++) {
 
 
 ## 6. continue문, break문
+
+### - continue문
+
+### - break문
 
 <br><br><br><br><br>
 
