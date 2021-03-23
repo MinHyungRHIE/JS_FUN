@@ -3,19 +3,22 @@
 <br><br><br><br><br>
 
 
-## 1. 배열 생성
+## 1. 배열 선언과 생성
+
+기본적인 배열 생성은 아래와 같다.
 ```js
 var arr = new Array(element0, element1, ..., elementN);
 var arr = Array(element0, element1, ..., elementN);
 var arr = [element0, element1, ..., elementN];
 var arr = Array.of(element0, element1, ..., elementN)
 ```
- -  길이가 0보다 크지만 아무런 요소를 가지고 있지 않은 배열을 생성하기 위한 방법
+
+길이를 지정하여 배열생성하는 방법은 아래와 같다.
 
 ```js
 var arrayLength = 5;
 var arr = new Array(arrayLength);
-var arr = Array(arrayLength
+var arr = Array(arrayLength);
 
 // This has exactly the same effect
 var arr = [];
@@ -26,19 +29,47 @@ var arr = [42];
 console.log(arr.length); //1
 ```
 
+<br><br><br>
+
+### - 확장 연산자
+
+```js
+var parts = ['shoulder', 'knees'];
+var lyrics = ['head', ...parts, 'and', 'toes'];
+
+//[ 'head', 'shoulders', 'knees', 'and', 'toes' ]
+```
+
+위와 같이, 확산연산자의 함수 호출은 다음과 같이 사용합니다.
+```js
+function f(x, y, z) { }
+var args = [0, 1, 2];
+f(...args);
+```
 <br><br><br><br><br>
 
+## 2. 배열 읽기
 
-## 2. 배열 저장
+### - for문
+```js
+var colors = ['red', 'green', 'blue'];
+for (var i = 0; i < colors.length; i++) {
+  console.log(colors[i]);
+}
+```
 
+### - forEach 함수
+```js
+var colors = ['red', 'green', 'blue'];
+colors.forEach(function(color) {
+  console.log(color);
+});
+```
 
+<br><br><br>
 
-<br><br><br><br><br>
+### - 배열의 길이
 
-
-확장 연산자
-
-## 3. 배열 길이
 ```js
 var emp = [];
 emp[0] = 'Casey Jones';
@@ -48,6 +79,7 @@ emp[2] = 'August West';
 이런식으로 인덱스로 값을 넣을 위치를 지정해주고 그에 따른 값을 명시해주면 된다.
 
 주의해야할 점은 양의 정수이여야만 한다.
+
 ```js
 var arr = [];
 arr[3.4] = 'Oranges';
@@ -55,23 +87,23 @@ console.log(arr.length);                // 0
 console.log(arr.hasOwnProperty(3.4));   // true
 배열을 생성함과 동시에 배열에 값을 저장할 수 있습니다. 
 ```
- - 배열 메서드도 요소 참조 가능하다.
+
+배열 메서드도 요소 참조 가능하다.
 ```js
 var arr = ['one', 'two', 'three'];
 arr[2];  // three
 arr["length"];  // 3
 ```
 
-### 배열 길이는 조심히
+배열 길이는 조심히 다뤄야한다.
 ```js
 var cats = [];
 cats[5] = ['Dusty'];
 console.log(cats.length); // 6
 ```
-앞 공간들은 empty
+앞 공간들은 empty!
 
-<br>
-<br>
+배열 길이를 줄이고 다시 늘리면 길이가 줄어든 자리의 원래값은 사라지고 empty로 채워지게 된다.
 
 ```js
 var cats = ['Dusty', 'Misty', 'Twiggy'];
@@ -86,59 +118,11 @@ console.log(cats); // logs []; the cats array is empty
 cats.length = 3;
 console.log(cats); // logs [ <3 empty items ]
 ```
-배열 길이를 줄이고 다시 늘리면 길이가 줄어든 자리의 원래값은 사라지고 empty로 채워지게 된다.
-
-### 확장 연산자
-확산연산자는 다중인수(함수호출)또는 다중요소(문자배열)들이 예상되는 곳에서 확장될 수 있는 표현을 하게합니다.
-
-Example: 만약 하나의 배열에 다른 하나의 배열을 추가하고 싶을 때에는 Array 리터럴 구문이 더이상 충분하지않으므로 push, splice, concat과 같은 함수를 사용하는 것이 좋습니다. 하지만 확산연산자를 사용할 경우 좀 더 간결한 구문으로 구현할 수 있습니다. 
-
-```js
-var parts = ['shoulder', 'knees'];
-var lyrics = ['head', ...parts, 'and', 'toes'];
-
-//[ 'head', 'shoulders', 'knees', 'and', 'toes' ]
-```
-위와 같이, 확산연산자의 함수 호출은 다음과 같이 사용합니다.
-```js
-function f(x, y, z) { }
-var args = [0, 1, 2];
-f(...args);
-```
-
 
 <br><br><br><br><br>
 
-
-## 4. 배열 읽기
- - for문
-```js
-var colors = ['red', 'green', 'blue'];
-for (var i = 0; i < colors.length; i++) {
-  console.log(colors[i]);
-}
-```
-
- - forEach()
-```js
-var colors = ['red', 'green', 'blue'];
-colors.forEach(function(color) {
-  console.log(color);
-});
-```
-
- - Arrow Function 이용하기
-```js
-var colors = ['red', 'green', 'blue'];
-colors.forEach(color => console.log(color));
-```
-for ... in 루프를 사용하여 JS배열을 반복하는 것은 바람직하지 않다고 한다. 
-
-<br><br><br><br><br>
-
-
-## 5. 배열 메소드
-### 함수와 메소드의 차이
+## 3. 배열 메소드
+### - 함수와 메소드의 차이
 갑자기 함수가아닌 메소드(Method)라는 이름이 나왔다. 자바스크립트에서 함수는 자바스크립트 내장 객체인 Function 생성자로 생성된 객체이다.
 자바스크립트의 함수는 값으로 취급된다. 
 
@@ -150,72 +134,79 @@ Function 내장 객체로 생성된 함수 객체가 프로퍼티가 될 때 이
 
 [관련 stackoverflow](https://stackoverflow.com/questions/155609/whats-the-difference-between-a-method-and-a-function)
 
-### concat() : 두 배열 합치기
+<br><br><br>
+
+### - concat() : 두 배열 합치기
 ```js
 var myArray = new Array('1', '2', '3');
 myArray = myArray.concat('a', 'b', 'c'); 
 // myArray is now ["1", "2", "3", "a", "b", "c"]
 ```
-<br><br>
 
- ### split() : 문자열 분리
+<br><br><br>
+
+### - split() : 문자열 분리
 ```js
 var myData = 'Manchester,London,Liverpool,Birmingham,Leeds,Carlisle';
 var myArray = myData.split(',');
 myArray;
 // (6) ["Manchester", "London", "Liverpool", "Birmingham", "Leeds", "Carlisle"]
 ```
-<br><br>
 
- ### slice(시작, 끝) : 배열 추출 >>> 새로운 배열
+<br><br><br>
+
+### - slice(시작, 끝) : 배열 추출
+새로운 배열로 받는다.
 ```js
 var myArray = new Array('a', 'b', 'c', 'd', 'e');
-myArray = myArray.slice(1, 4); // starts at index 1 and extracts all elements
-                               // until index 3, returning [ "b", "c", "d"]
+myArray = myArray.slice(1, 4); // until index 3, returning ["b", "c", "d"]
 ```
-<br><br>
+                               
+<br><br><br>
 
-### splice(인덱스, 몇개 지워?, addElement1, addElement2, ...) 
+### - splice(어디 인덱스 부터, 몇개 지워?, addElement1, addElement2, ...) 
 ```js
 var myArray = new Array('1', '2', '3', '4', '5');
-myArray.splice(1, 3, 'a', 'b', 'c', 'd'); 
-// myArray is now ["1", "a", "b", "c", "d", "5"]
-// This code started at index one (or where the "2" was), 
-// removed 3 elements there, and then inserted all consecutive
-// elements in its place.
+myArray.splice(1, 3, 'a', 'b', 'c', 'd'); //["1", "a", "b", "c", "d", "5"]
 ```
-<br><br>
 
-### join() : 문자열 합체
+<br><br><br>
+
+### - join() : 배열을 문자열로 변환한다.
 - join(delimiter = ',')
+
 ```js
 var myNewString = myArray.join();
 myNewString;
 var myArray = new Array('Wind', 'Rain', 'Fire');
 var list = myArray.join(' - '); // list is "Wind - Rain - Fire"
 ```
-배열을 문자열로 변환하는 또 다른 방법은 **`toString()`** 를 사용하는 것 
+
+배열을 문자열로 변환하는 또 다른 방법은 **`toString()`** 를 사용하는 것
 ```js
 var dogNames = ['Rocket','Flash','Bella','Slugger'];
 dogNames.toString(); //Rocket,Flash,Bella,Slugger
 ```
-<br><br>
 
- ### reverse() : 역정렬 아님! 그냥 반대로 배치
+<br><br><br>
+
+### - reverse() : 역정렬 아님! 그냥 반대로 배치
+
 ```js
 var myArray = new Array('1', '3', '2');
 myArray.reverse(); 
 myArray; // (3) ["2", "3", "1"]
 ```
-<br><br>
 
-###  sort() : 정렬
+<br><br><br>
+
+### - sort() : 정렬
 ```js
 var myArray = [3, 6, 1, 10, 2];
 myArray.sort(); 
 myArray // (5) [1, 10, 2, 3, 6]
 ```
-#### 잠깐... 우리가 원하는 결과는 아래
+잠깐... 우리가 원하는 결과는 아래와 같다.
 ```console
 (5) [1, 2, 3, 6, 10]
 ```
@@ -232,9 +223,9 @@ myArray.sort(sortNumber);
 myArray; // (7) [1, 2, 3, 6, 10, 14, 103]
 ```
 
-<br><br>
+<br><br><br>
 
-### indexOf (searchElement [, fromIndex])
+### - indexOf (searchElement [, fromIndex])
  배열에서 searchElement를 검색하고 첫 번째 일치 항목의 인덱스를 반환
 ```js
 var a = ['a', 'b', 'a', 'b', 'a'];
@@ -243,10 +234,9 @@ console.log(a.indexOf('b')); // logs 1
 console.log(a.indexOf('b', 2)); // logs 3
 console.log(a.indexOf('z')); // logs -1, because 'z' was not found
 ```
+<br><br><br>
 
-<br><br>
-
-### map(callback[, thisObject])
+### - map(callback[, thisObject])
 배열의 모든 요소에 대해 콜백함수를 실행하고 콜백함수의 실행결과를 새로운 배열에 담아 반환
 ```js
 var a1 = ['a', 'b', 'c'];
@@ -254,9 +244,9 @@ var a2 = a1.map(function(item) { return item.toUpperCase(); });
 console.log(a2); // logs ['A', 'B', 'C']
 ```
 
-<br><br>
+<br><br><br>
 
-### filter(callback[, thisObject])
+### - filter(callback[, thisObject])
 배열의 모든 요소에 대해 콜백 함수가 true를 반환하는 요소를 새로운 배열에 담아 반환 
 ```js
 var a1 = ['a', 10, 'b', 20, 'c', 30];
@@ -264,9 +254,9 @@ var a2 = a1.filter(function(item) { return typeof item == 'number'; });
 console.log(a2); // logs ['10', '20', '30']
 ```
 
-<br><br>
+<br><br><br>
 
-### every (callback [, thisObject])
+### - every (callback [, thisObject])
 콜백이 배열의 모든 항목에 대해 true를 반환하면 true를 반환
 ```js
 function isNumber(value){
@@ -278,9 +268,9 @@ var a2 = [1, '2', 3];
 console.log(a2.every(isNumber)); // logs false
 ```
 
-<br><br>
+<br><br><br>
 
-### some(callback[, thisObject])
+### - some(callback[, thisObject])
 배열의 모든 요소에 대해 콜백 함수를 실행하고 하나의 요소라도 콜백 함수의 결과가 true이면 some()메서드의 결과는 true
 ```js
 function isNumber(value){
@@ -294,23 +284,20 @@ var a3 = ['1', '2', '3'];
 console.log(a3.some(isNumber)); // logs false
 ```
 
-<br><br>
+<br><br><br>
 
-### reduce(callback[, initialValue])
+### - reduce(callback[, initialValue])
 배열내의 요소를 하나의 요소로 줄이기 위해 firstValue, secondValue를 인자로 받는 콜백 함수를 실행
 ```js
 var a = [10, 20, 30, 40, 50];
-var total = a.reduce(function(first, second) { return first + second; }, 0);
-console.log(total) // Prints 150
+var total = a.reduce(function(first, second) { return first + second; }, 100);
+console.log(total) // Prints 250
 ```
  - reduceRight(callback[, initalvalue]) 메서드는 반대로 진행
 
-<br><br>
+<br><br><br>
 
-
-### item 추가/제거
-
- - push() : 배열의 끝에 추가할 item을 반드시 하나 이상 포함해야 한다는 점을 기억
+### - push() : 배열의 끝에 추가할 item을 반드시 하나 이상 포함해야 한다는 점을 기억
 ```js
 myArray.push('Cardiff');
 myArray;
@@ -318,7 +305,9 @@ myArray.push('Bradford', 'Brighton');
 myArray;
 ```
 
- - pop() : 배열 끝 삭제
+<br><br><br>
+
+### - pop() : 배열 끝 삭제
 ```js
 var myArray = ["Manchester", "London", "Liverpool", "Birmingham", "Leeds", "Carlisle"]
 myArray.pop()
@@ -329,25 +318,20 @@ myArray
 
 *그러면 배열의 제일 처음 부분 item 추가/제거는?*
 
- - unshift() <-> push()
+#### * unshift() <-> push()
 ```js
 myArray.unshift('Edinburgh');
 myArray;
 ```
- - shift() <-> pop()
+#### * shift() <-> pop()
 ```js
 myArray.shift();
 ```
 
 <br><br><br><br><br>
 
-## 배열로 `정규표현식` 사용하기
-[나중에 필요할 때 찾아보기 위한 링크](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+## 4. arguments 객체
 
-<br><br><br><br><br>
-
-## arguments 객체와 배열
-[arguments 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/arguments)
 ```js
 function printArray(){
   Array.prototype.forEach.call(arguments, function(item) { 
@@ -362,10 +346,30 @@ printArray("Hahaha", "React React", "JS OMG");
 
 call()은 Function의 프로토타입에 정의되어 있는 메서드이다.
 
-자세한 내용은 아래 문서를 살펴보자
+### - 관련 문서
+
+ - [arguments 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/arguments)
+
  - [Function.call()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
 
-call()과 비슷한 apply() 한번 봐보자
-  - [Function.apply()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+ - [Function.apply()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+
+#### * call()과 apply()의 차이
+ - call() : `call(this||arguments, arg1, arg2, arg3, arg4...)`처럼 인수 목록을 받는다.
+ - apply() : `apply(this||arguments, 배열)`처럼 인수들의 단일 배열을 받는다.
+
+ ```js
+const numbers = [5, 6, 2, 3, 7];
+
+const max = Math.max.apply(null, numbers);
+
+console.log(max);
+// expected output: 7
+
+const min = Math.min.apply(null, numbers);
+
+console.log(min);
+// expected output: 2
+ ```
 
 참고로 `Function.arguments`는 **Deprecated**되었으니 Function을 통해 사용하지 말자

@@ -113,9 +113,10 @@
 <br><br><br><br><br>
 
 # `[6] 예외처리`
-## 1. throw문
-## 2. try~catch~finally문
-### - 에러처리 위임하기
+## 1. 예외 처리의 필요성
+## 2. throw문
+## 3. try~catch~finally문
+### - 예외처리 위임하기
 ### - finally와 return의 관계
 
 <br><br><br><br><br>
@@ -126,18 +127,38 @@
 ## 1. 배열 선언과 생성
 ### - 확장 연산자
 ## 2. 배열 읽기
+### - for문
+### - forEach 함수
 ### - 배열의 길이
 ## 3. 배열 메소드
+### - 함수와 메소드의 차이
+### - concat() : 두 배열 합치기
+### - split() : 문자열 분리
+### - slice(시작, 끝) : 배열 추출
+### - splice(어디 인덱스 부터, 몇개 지워?, addElement1, addElement2, ...) 
+### - join() : 배열을 문자열로 변환한다.
+### - reverse() : 역정렬 아님! 그냥 반대로 배치
+### - sort() : 정렬
+### - indexOf (searchElement [, fromIndex])
+### - map(callback[, thisObject])
+### - filter(callback[, thisObject])
+### - every (callback [, thisObject])
+### - some(callback[, thisObject])
+### - reduce(callback[, initialValue])
+### - push() : 배열의 끝에 추가할 item을 반드시 하나 이상 포함해야 한다는 점을 기억
+### - pop() : 배열 끝 삭제
+#### * unshift() <-> push()
+#### * shift() <-> pop()
 ## 4. arguments 객체
+### - 관련 문서
+#### * call()과 apply()의 차이
+
 <br><br><br><br><br>
 <hr>
 <br><br><br><br><br>
 
 # `[8] 문자열`
-## 1. 객체 생성과 사용
-## 2. 프로토타입(prototype) 형식
-## 3. 클래스(class) 형식
-## 4. 상속
+## 
 
 <br><br><br><br><br>
 <hr>
@@ -145,7 +166,16 @@
 
 # `[9] 객체의 기본`
 ## 1. 객체 생성과 사용
+### - 객체의 주요 키워드
+### - 객체 생성
+#### * 기본 객체(Object)의 생성자 함수 이용
+#### * 객체 리터럴 이용
+#### * 생성자 함수 이용
+### - 객체 프로퍼티 접근 방식
 ## 2. 프로토타입(prototype) 형식
+### - 프로토타입안에 있는 것과 없는 것의 차이
+### - `prototype`과 `__proto__`
+### - 프로토타입 활용하기
 ## 3. 클래스(class) 형식
 ## 4. 상속
 ## 5. Object 객체
@@ -232,6 +262,7 @@
 <br><br><br><br><br>
 
 # `추가 및 고려해야할 것`
+## Infinity 객체
 ## Class and Factory
 
 class는 ES6(ECMAScript 2015)에서 추가된 문법

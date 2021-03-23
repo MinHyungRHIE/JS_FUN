@@ -86,7 +86,7 @@ function multiply(multiplier, ...theArgs) {
 var arr = multiply(2, 1, 2, 3);
 console.log(arr); // [2, 4, 6]
 ```
-theArgs는 배열로 들어옵니다.
+theArgs는 배열로 들어옵니다.(확장 연산자)
 
 
 <br><br><br><br><br>
