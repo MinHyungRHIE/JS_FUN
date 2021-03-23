@@ -16,9 +16,20 @@ console.log(result); //30
  - +true 는 1. 을 반환합니다.
 
 #### * 문자열 연산자
+
+문자열 + 문자열 = 문자열 확장
 ```js
 console.log("my " + "string"); // console logs the string "my string".
 ```
+
+숫자 + 문자열 = 문자열
+
+```js
+let combination = 10 + " is number"
+console.log(combination); // 10 is number
+console.log(typeof combination); // string
+```
+
 
 ### - `-` 
 ```js

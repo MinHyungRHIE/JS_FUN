@@ -66,6 +66,50 @@ colors.forEach(function(color) {
 });
 ```
 
+파라미터가 하나더 늘어가게되면 index가 리턴이 된다.
+
+
+```js
+let myArr = [10, 20, 30, 40, 50];
+
+myArr.forEach(function(item ,index){
+	console.log(item, index)
+});
+/* OUTPUT
+  10 0
+  20 1
+  30 2
+  40 3
+  50 4
+ */
+
+let myObj = [
+	{
+  	"name":"rhie",
+    "age": 30
+  },
+  {
+		"name":"son",
+    "age": 40
+  
+  },
+  {
+		"name":"okka",
+    "age": 20
+  
+  }
+]
+
+myObj.forEach(function(item ,index){
+	console.log(item, index)
+});
+/* OUTPUT
+ {name: "rhie", age: 30} 0
+ {name: "son", age: 40} 1
+ {name: "okka", age: 20} 2
+ */
+```
+
 <br><br><br>
 
 ### - 배열의 길이
@@ -242,6 +286,38 @@ console.log(a.indexOf('z')); // logs -1, because 'z' was not found
 var a1 = ['a', 'b', 'c'];
 var a2 = a1.map(function(item) { return item.toUpperCase(); });
 console.log(a2); // logs ['A', 'B', 'C']
+```
+
+<br><br><br>
+
+### - flatMap()
+
+1 level 더 평탄화 시켜줍니다.
+
+```js
+let arr1 = [1, 2, 3, 4];
+
+arr1.map(x => [x * 2]);
+// [[2], [4], [6], [8]]
+
+arr1.flatMap(x => [x * 2]);
+// [2, 4, 6, 8]
+
+// 한 레벨만 평탄화됨
+arr1.flatMap(x => [[x * 2]]);
+// [[2], [4], [6], [8]]
+```
+
+또 다른 예제입니다.
+
+```js
+let arr1 = ["it's Sunny in", "", "California"];
+
+arr1.map(x=>x.split(" "));
+// [["it's","Sunny","in"],[""],["California"]]
+
+arr1.flatMap(x => x.split(" "));
+// ["it's","Sunny","in","California"]
 ```
 
 <br><br><br>

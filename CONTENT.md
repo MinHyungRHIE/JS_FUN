@@ -141,6 +141,7 @@
 ### - sort() : 정렬
 ### - indexOf (searchElement [, fromIndex])
 ### - map(callback[, thisObject])
+### - flatMap()
 ### - filter(callback[, thisObject])
 ### - every (callback [, thisObject])
 ### - some(callback[, thisObject])
@@ -158,7 +159,28 @@
 <br><br><br><br><br>
 
 # `[8] 문자열`
-## 
+## 1. 문자열 사용법
+### - 문자열 리터럴
+### - 문자열 객체
+### - 문자열 길이
+### - 문자열 특징
+## 2. 문자열 메소드
+### - 문자열 찾기 활용 indexOf()
+### - 문자열 자르기 slice(), substring()
+### - 대소문자 변경 toLowerCase(), toUpperCase()
+### - 문자열 일부 변경 replace()
+### - 문자열 합치기 concat()
+### - 문자열 포함 여부 startsWith(), endsWith(), includes()
+### - 문자열 분리 split()
+### - 문자열 시작과 끝 공백 자르기 trim()
+## 3. 템플릿 문자열
+### - Template Literal
+### - Multi-line Strings
+### - Expression Interpolation(표현식 삽입법)
+### - Nesting Templates
+### - Tagged Templates
+### - Raw Strings
+### - eval()
 
 <br><br><br><br><br>
 <hr>
@@ -177,9 +199,16 @@
 ### - `prototype`과 `__proto__`
 ### - 프로토타입 활용하기
 ## 3. 클래스(class) 형식
+### - Getter와 Setter
+### - static
 ## 4. 상속
-## 5. Object 객체
-## 6. 객체 관련 연산자
+### - 프로토타입형
+
+### - 클래스형
+
+## 5. call(), apply(), bind()
+## 6. Object 객체
+## 7. 객체 관련 연산자
 ### - 단항 연산자 `delete`, `typeof`, `void`
 ### - 관계 연산자 `in`, `instanceof`
 
