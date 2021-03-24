@@ -86,11 +86,78 @@ const foo = new Foo(); // TypeError: Foo is not a constructor
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 9. use strict
 엄격모드입니다. 엄격모드는 전체 스크립트 또는 부분 함수에 적용가능합니다. 단, {} 괄호로 묶여진 블럭문에는 적용되지 않습니다. 
 [가이드북](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Strict_mode)
 <br><br><br><br><br>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 배열로 `정규표현식` 사용하기
 [나중에 필요할 때 찾아보기 위한 링크](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 6. Class and Factory
+class는 ES6(ECMAScript 2015)에서 추가된 문법
+
+[JavaScript Factory functions vs Constructor functions.](https://medium.com/@chamikakasun/javascript-factory-functions-vs-constructor-functions-585919818afe)
+
+[Class vs Factory function: exploring the way forward](https://www.freecodecamp.org/news/class-vs-factory-function-exploring-the-way-forward-73258b6a8d15/)
+
+[JavaScript Factory Functions vs Constructor Functions vs Classes](https://medium.com/javascript-scene/javascript-factory-functions-vs-constructor-functions-vs-classes-2f22ceddf33e)

@@ -1,3 +1,12 @@
-배열 메소드 더 추가하기
-
 https://ko.javascript.info/js
+
+https://seonhyungjo.github.io/Javascript-Book/basic/13-Object.create_Object.assign.html
+
+
+폴리필이 뭘까?
+
+화살표 함수 추가하기
+
+정규표현식 추가하기
+
+usestrict 추가하기
