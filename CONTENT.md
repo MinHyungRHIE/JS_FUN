@@ -198,6 +198,9 @@
 ### - 프로토타입안에 있는 것과 없는 것의 차이
 ### - `prototype`과 `__proto__`
 ### - 프로토타입 활용하기
+### - Getter와 Setter
+### - Delete Property
+### - 효율적인 사용 : getPrototypeOf(), hasOwnProperty()
 ## 3. 클래스(class) 형식
 ### - Getter와 Setter
 ### - static
