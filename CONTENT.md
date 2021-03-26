@@ -220,6 +220,12 @@
 ### - apply()
 ### - bind()
 ## 6. Object 객체
+### - Object.create()
+#### * Object.defineProperty()
+#### * Object.defineProperties() 
+### - Object.create()와 비슷한 Object.assign()
+#### * 객체 복사
+#### * Shallow Copy, Deep Copy
 ## 7. 객체 관련 연산자
 ### - 단항 연산자 `delete`, `typeof`, `void`
 ### - 관계 연산자 `in`, `instanceof`
@@ -241,6 +247,7 @@
 ## 6. JSON
 ## 7. 화살표 함수
 ## 8. use strict
+## 폴리필
 
 <br><br><br><br><br>
 <hr>
