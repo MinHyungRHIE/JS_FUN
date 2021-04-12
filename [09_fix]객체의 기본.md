@@ -1173,7 +1173,7 @@ console.log(newSong); //{name: "Album", price: 2000}
 //Product의 인스턴스가 아니다. 
 ```
 
-#### * Shallow Copy, 
+#### * Shallow Copy
 
 ```js
 let origin = {
@@ -1220,8 +1220,8 @@ let origin = {
 let makeStringToCopy = JSON.stringify(origin);
 console.log(makeStringToCopy, typeof makeStringToCopy); //{a: 10, b: {b1: 20, b2: 30}} object
 
-let copy = JSON.parse(makeStringToCopy); //{a: 10, b: {b1: 20, b2: 30}} string
-console.log(copy, typeof copy);
+let copy = JSON.parse(makeStringToCopy); 
+console.log(copy, typeof copy); //{a: 10, b: {b1: 20, b2: 30}} string
 
 origin.b.b1 = 100;
 console.log(origin);//{a: 10, b: {b1: 100, b2: 30}}
@@ -1328,7 +1328,7 @@ let music = new Album("IU", 1000, playList);
 console.log("createSerial" in music); //true
 let copyMusic = JSON.parse(JSON.stringify(music));
 copyMusic.__proto__ = Album.prototype;
-console.log("createSerial" in copyMusic); //false
+console.log("createSerial" in copyMusic); //true
 playList[0] = "One Love";
 
 console.log(music.playList); // ["One Love", "밤 편지", "너랑나", "무릎", "복숭아"]
@@ -1443,31 +1443,10 @@ for (const [key, value] of Object.entries(obj)) {
 
 ## 7. 객체 관련 연산자
 
-
-
-<br><br><br><br><br>
-
 ### - 단항 연산자 `delete`, `typeof`, `void`
 
-<br><br><br><br><br>
+#### * delete
 
-### - 관계 연산자 `in`, `instanceof`
-
-
-<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-
-
-
-
-
-
-`Object.freeze()`
-<br><br><br><br><br>
-
-## 단항 연산자
-#### `delete`
 ```js
 x = 42;
 var y = 43;
@@ -1498,10 +1477,12 @@ if (3 in trees) {
 }
 ```
 
-#### `typeof`
+#### * typeof
+
 typeof 연산자는 피연산자의 타입을 나타내는 `문자열을 반환!!!(중요)`
 
-#### `void`
+#### * void
+
 void 연산자는 값을 반환하지 않고 평가되도록 명시
 ```js
 function a(){
@@ -1516,13 +1497,16 @@ a() /*
 void(a()) /*
             the function of a()
                                 */
-
 ```
 
-<br><br><br><br><br>
 
-## 관계 연산자
-#### `in` : 객체에 특정한 속성이 있는경우 true를 반환
+<br><br><br>
+
+### - 관계 연산자 `in`, `instanceof`
+
+#### * in
+
+객체에 특정한 속성이 있는경우 true를 반환
 
 ```js
 // Arrays
@@ -1545,7 +1529,9 @@ var mycar = { make: "Honda", model: "Accord", year: 1998 };
 "model" in mycar; // returns true
 ```
 
-#### `instanceof` : 명시된 객체가 명시된 객체형인 경우 true를 반환
+#### * instanceof
+
+명시된 객체가 명시된 객체형인 경우 true를 반환
 ```js
 var theDay = new Date(1995, 12, 17);
 if (theDay instanceof Date) {
@@ -1553,4 +1539,3 @@ if (theDay instanceof Date) {
 }
 ```
 
-[Object 메소드 더알아보기](https://seonhyungjo.github.io/Javascript-Book/basic/13-Object.create_Object.assign.html)

@@ -228,7 +228,12 @@
 #### * Shallow Copy, Deep Copy
 ## 7. 객체 관련 연산자
 ### - 단항 연산자 `delete`, `typeof`, `void`
+#### * delete
+#### * typeof
+#### * void
 ### - 관계 연산자 `in`, `instanceof`
+#### * in
+#### * instanceof
 
 <br><br><br><br><br>
 <hr>
@@ -236,18 +241,28 @@
 
 # `[10] 객체의 심화`
 ## 1. Primitive Type, Reference Type
-## 2. Shallow Copy, Deep Copy
-## 3. Pure 메소드, Impure 메소드
-## 4. Wrapper 클래스
+### - Primitive Type
+### - Reference Type
+## 2. Pure 메소드, Impure 메소드
+### - 왜 Pure 메소드와 Impure 메소드를 구분하는가
+### - Impure 메소드
+### - Pure 메소드
+## 3. Wrapper 클래스
 ### - Number
 ### - String
 ### - Boolean
 ### - Symbol
-## 5. 타입 제대로 확인하기
-## 6. JSON
-## 7. 화살표 함수
-## 8. use strict
-## 폴리필
+## 4. 타입 제대로 확인하기
+### - typeof의 문제점
+### - 타입 확인 메소드 만들기
+## 6. 화살표 함수
+
+
+-----------------------------------------------
+##### 폴리필
+##### JSON
+##### use strict
+-----------------------------------------------
 
 <br><br><br><br><br>
 <hr>
