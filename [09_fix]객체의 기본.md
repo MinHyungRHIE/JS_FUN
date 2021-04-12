@@ -1499,7 +1499,6 @@ void(a()) /*
                                 */
 ```
 
-
 <br><br><br>
 
 ### - 관계 연산자 `in`, `instanceof`
@@ -1532,10 +1531,10 @@ var mycar = { make: "Honda", model: "Accord", year: 1998 };
 #### * instanceof
 
 명시된 객체가 명시된 객체형인 경우 true를 반환
+
 ```js
 var theDay = new Date(1995, 12, 17);
 if (theDay instanceof Date) {
   // statements to execute
 }
 ```
-

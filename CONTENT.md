@@ -225,7 +225,10 @@
 #### * Object.defineProperties() 
 ### - Object.create()와 비슷한 Object.assign()
 #### * 객체 복사
-#### * Shallow Copy, Deep Copy
+#### * Shallow Copy
+#### * JSON 활용하기 & Deep Copy
+### - Object.freeze()
+### - Object.entries()
 ## 7. 객체 관련 연산자
 ### - 단항 연산자 `delete`, `typeof`, `void`
 #### * delete
@@ -240,6 +243,7 @@
 <br><br><br><br><br>
 
 # `[10] 객체의 심화`
+
 ## 1. Primitive Type, Reference Type
 ### - Primitive Type
 ### - Reference Type
@@ -262,39 +266,20 @@
 ##### 폴리필
 ##### JSON
 ##### use strict
+#####  7. 타입 제대로 확인하기
+#####  8. 컬렉션
+#####  9. 반복자와 제너레이터
+#####  10. Infinity
+#####  11. 날짜다루기
+#####  12. 정규표현식
+#####  13. 모듈
 -----------------------------------------------
 
 <br><br><br><br><br>
 <hr>
 <br><br><br><br><br>
 
-# `[11] 컬렉션`
-
-<br><br><br><br><br>
-<hr>
-<br><br><br><br><br>
-
-# `[12] 반복자와 제너레이터`
-
-<br><br><br><br><br>
-<hr>
-<br><br><br><br><br>
-
-# `[13] 모듈`
-
-
-<br><br><br><br><br>
-<hr>
-<br><br><br><br><br>
-
-# `[14] 날짜다루기`
-
-
-<br><br><br><br><br>
-<hr>
-<br><br><br><br><br>
-
-# `[15] 비동기적인 JavaScript 활용`
+# `[11] 비동기적인 JavaScript 활용`
 
 ## 1. JS 메모리
 ## 2. setInterval(), setTimeout()
@@ -306,26 +291,23 @@
 <hr>
 <br><br><br><br><br>
 
-# `[16] 정규표현식`
+# `[12] DOM 제어`
 
 <br><br><br><br><br>
 <hr>
 <br><br><br><br><br>
 
-# `[16] 함수형 프로그래밍과 RxJS`
+# `[13] 함수형 프로그래밍과 RxJS`
 
 <br><br><br><br><br>
 <hr>
 <br><br><br><br><br>
 
-# `[17] DOM 제어`
 
-<br><br><br><br><br>
-<hr>
-<br><br><br><br><br>
+
 
 # `추가 및 고려해야할 것`
-## Infinity 객체
+
 ## Class and Factory
 
 class는 ES6(ECMAScript 2015)에서 추가된 문법
